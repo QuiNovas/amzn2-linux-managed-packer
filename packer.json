@@ -1,0 +1,46 @@
+{
+  "variables": {
+    "ami_name": "",
+    "local_ip": "",
+    "source_ami": ""
+  },
+  "builders": [
+    {
+      "access_key": "",
+      "ami_groups": [
+        "all"
+      ],
+      "ami_name": "{{user `ami_name`}}-{{isotime \"20060102150405\"}}",
+      "ami_regions": [
+        "us-east-1",
+        "us-east-2",
+        "us-west-1",
+        "us-west-2"
+      ],
+      "instance_type": "c4.xlarge",
+      "region": "us-east-1",
+      "secret_key": "",
+      "source_ami": "{{user `source_ami`}}",
+      "ssh_file_transfer_method": "sftp",
+      "ssh_pty": true,
+      "ssh_username": "ec2-user",
+      "tags": {
+        "SourceAMI": "{{user `source_ami`}}"
+      },
+      "temporary_security_group_source_cidr": "{{user `local_ip`}}/32",
+      "type": "amazon-ebs"
+    }
+  ],
+  "provisioners": [
+    {
+      "scripts": [
+        "scripts/yum.sh",
+        "scripts/awslogs.sh",
+        "scripts/awsinspector.sh",
+        "scripts/cleanup.sh"
+      ],
+      "type": "shell"
+    }
+
+  ]
+}

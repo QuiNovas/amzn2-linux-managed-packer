@@ -1,0 +1,4 @@
+{
+  "ami_name": "amzn2-ami-minimal-hvm-managed",
+  "source_ami": "ami-6c72d211"
+}
