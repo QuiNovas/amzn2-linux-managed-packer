@@ -37,6 +37,7 @@
         "scripts/yum.sh",
         "scripts/awslogs.sh",
         "scripts/awsinspector.sh",
+        "scripts/awsssm.sh",
         "scripts/cleanup.sh"
       ],
       "type": "shell"
