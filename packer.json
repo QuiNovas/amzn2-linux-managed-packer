@@ -1,8 +1,7 @@
 {
   "variables": {
     "ami_name": "",
-    "local_ip": "",
-    "source_ami": ""
+    "local_ip": ""
   },
   "builders": [
     {
@@ -20,13 +19,18 @@
       "snapshot_groups": [
         "all"
       ],
-      "source_ami": "{{user `source_ami`}}",
+      "source_ami_filter": {
+        "filters": {
+          "name": "amzn2-ami-minimal-hvm-selinux-*"
+        },
+        "most_recent": true,
+        "owners": [
+          "self"
+        ]
+      },
       "ssh_file_transfer_method": "sftp",
       "ssh_pty": true,
       "ssh_username": "ec2-user",
-      "tags": {
-        "SourceAMI": "{{user `source_ami`}}"
-      },
       "temporary_security_group_source_cidr": "{{user `local_ip`}}/32",
       "type": "amazon-ebs"
     }
