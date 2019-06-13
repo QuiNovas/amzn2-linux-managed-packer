@@ -41,6 +41,7 @@
         "scripts/yum.sh",
         "scripts/awsinspector.sh",
         "scripts/awsssm.sh",
+        "scripts/cloudwatch.sh",
         "scripts/cleanup.sh"
       ],
       "type": "shell"

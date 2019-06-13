@@ -24,9 +24,8 @@ fi
 
 sudo rpm -U ./amazon-cloudwatch-agent.rpm
 
-cp /tmp/files/cloudwatch.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+sudo cp /tmp/files/cloudwatch.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
 
-rm -f ./amazon-cloudwatch-agent*
+sudo rm -f ./amazon-cloudwatch-agent*
 
 sudo systemctl enable amazon-cloudwatch-agent
-sudo systemctl start amazon-cloudwatch-agent
