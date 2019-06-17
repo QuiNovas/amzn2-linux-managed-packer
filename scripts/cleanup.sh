@@ -2,4 +2,4 @@
 
 sudo yum -y clean all
 
-rm -rf /var/cache/yum/*
+sudo rm -rf /var/cache/yum/*

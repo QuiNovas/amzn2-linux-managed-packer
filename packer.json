@@ -31,11 +31,16 @@
       "ssh_file_transfer_method": "sftp",
       "ssh_pty": true,
       "ssh_username": "ec2-user",
-      "temporary_security_group_source_cidr": "{{user `local_ip`}}/32",
+      "temporary_security_group_source_cidrs": "{{user `local_ip`}}/32",
       "type": "amazon-ebs"
     }
   ],
   "provisioners": [
+    {
+      "type": "file",
+      "source": "./files",
+      "destination": "/tmp"
+    },
     {
       "scripts": [
         "scripts/yum.sh",
