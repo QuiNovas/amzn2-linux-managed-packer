@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  validate:
+    docker:
+      - image: hashicorp/packer:1.4.1
+    steps:
+      - checkout
+      - run:
+          name: Validate
+          command: packer validate -var local_ip=$(wget -qO - ipv4bot.whatismyipaddress.com) --var-file=vars.json packer.json
+  build-ami:
+    docker:
+      - image: hashicorp/packer:1.4.1
+    steps:
+      - checkout
+      - run:
+          name: Build AMI
+          command: packer build --var-file=vars.json -var aws_access_key=${ACCESS_KEY_ID} -var aws_secret_key=${SECRET_ACCESS_KEY} -var local_ip=$(wget -qO - ipv4bot.whatismyipaddress.com) packer.json
+          no_output_timeout: 30m
+workflows:
+  version: 2
+  validate-only:
+    jobs:
+      - validate:
+          filters:
+            branches:
+              only:
+                - develop
+  build-ami:
+    jobs:
+      - validate
+      - build-ami:
+          context: packer
+          requires:
+            - validate
+          filters:
+            branches:
+              only:
+                - master
