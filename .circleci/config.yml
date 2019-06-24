@@ -33,6 +33,9 @@ workflows:
           context: packer
           requires:
             - validate
+    triggers:
+      - schedule:
+          cron: "0 0 1 * *"
           filters:
             branches:
               only:
