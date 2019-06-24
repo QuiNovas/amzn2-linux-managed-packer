@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-sudo yum clean all
-rm install
+sudo yum -y clean all
+
+sudo rm -rf /var/cache/yum/*

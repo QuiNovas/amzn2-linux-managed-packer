@@ -1,11 +1,13 @@
 {
   "variables": {
     "ami_name": "",
+    "aws_access_key": "",
+    "aws_secret_key": "",
     "local_ip": ""
   },
   "builders": [
     {
-      "access_key": "",
+      "access_key": "{{user `aws_access_key`}}",
       "ami_groups": [
         "all"
       ],
@@ -15,7 +17,7 @@
       ],
       "instance_type": "c4.xlarge",
       "region": "us-east-1",
-      "secret_key": "",
+      "secret_key": "{{user `aws_secret_key`}}",
       "snapshot_groups": [
         "all"
       ],
@@ -31,17 +33,22 @@
       "ssh_file_transfer_method": "sftp",
       "ssh_pty": true,
       "ssh_username": "ec2-user",
-      "temporary_security_group_source_cidr": "{{user `local_ip`}}/32",
+      "temporary_security_group_source_cidrs": "{{user `local_ip`}}/32",
       "type": "amazon-ebs"
     }
   ],
   "provisioners": [
     {
+      "type": "file",
+      "source": "./files",
+      "destination": "/tmp"
+    },
+    {
       "scripts": [
         "scripts/yum.sh",
-        "scripts/awslogs.sh",
         "scripts/awsinspector.sh",
         "scripts/awsssm.sh",
+        "scripts/cloudwatch.sh",
         "scripts/cleanup.sh"
       ],
       "type": "shell"
