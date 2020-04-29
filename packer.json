@@ -33,6 +33,9 @@
       "ssh_file_transfer_method": "sftp",
       "ssh_pty": true,
       "ssh_username": "ec2-user",
+      "tags" : {
+				"Name": "{{user `ami_name`}}"
+			},
       "temporary_security_group_source_cidrs": "{{user `local_ip`}}/32",
       "type": "amazon-ebs"
     }
